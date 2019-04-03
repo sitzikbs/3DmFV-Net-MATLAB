@@ -87,16 +87,16 @@ function [lgraph, module_last_layer_name] = inception3D(n_filters, kernel_sizes,
 %        lgraph: the constructed layer graph
 %       module_last_layer_name: string of the last layer name to be used in
 % follwing layers
-lgraph = addLayers(lgraph, [convolution3dLayer(1,n_filters, 'Name',['cnn_1', module_scope])
+lgraph = addLayers(lgraph, [convolution3dLayer(1,n_filters, 'padding', 'same', 'Name',['cnn_1', module_scope])
     batchNormalizationLayer('Name',['bn_1' , module_scope])
     reluLayer('Name',['relu_1' , module_scope])]);
-lgraph = addLayers(lgraph, [convolution3dLayer(kernel_sizes(1),int8(n_filters/2), 'Name',['cnn_2', module_scope])
+lgraph = addLayers(lgraph, [convolution3dLayer(kernel_sizes(1),int8(n_filters/2), 'padding', 'same', 'Name',['cnn_2', module_scope])
     batchNormalizationLayer('Name',['bn_2', module_scope])
     reluLayer('Name',['relu_2', module_scope])]);
-lgraph = addLayers(lgraph, [convolution3dLayer(kernel_sizes(2),int8(n_filters/2), 'Name',['cnn_3', module_scope])
+lgraph = addLayers(lgraph, [convolution3dLayer(kernel_sizes(2),int8(n_filters/2), 'padding', 'same', 'Name',['cnn_3', module_scope])
     batchNormalizationLayer('Name',['bn_3', module_scope])
     reluLayer('Name',['relu_3', module_scope])]);
-lgraph = addLayers(lgraph, [averagePooling3dLayer(kernel_sizes(1), 'Name',['avg_pool', module_scope])
+lgraph = addLayers(lgraph, [averagePooling3dLayer(kernel_sizes(1), 'padding', 'same', 'Name',['avg_pool', module_scope])
     convolution3dLayer(1,n_filters,  'Name',['cnn_4', module_scope])
     batchNormalizationLayer('Name',['bn_4', module_scope])
     reluLayer('Name',['relu_4', module_scope])]);

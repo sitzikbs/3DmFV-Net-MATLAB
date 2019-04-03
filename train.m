@@ -3,8 +3,8 @@ close all
 clc
 
 %% Initialize variables
-trainset_path = 'C:\Users\Itzik\Documents\Datasets\ModelNet40\matlab_dataset\train\'; 
-testset_path  = 'C:\Users\Itzik\Documents\Datasets\ModelNet40\matlab_dataset\test\';
+trainset_path = '/home/itzik/MatlabProjects/3DmFVNet/data/ModelNet40/train/'; 
+testset_path  = '/home/itzik/MatlabProjects/3DmFVNet/data/ModelNet40/test/';
 
 %GMM variables
 n_gaussians = 8;
@@ -14,9 +14,9 @@ flatten = false;
 inputSize = [n_gaussians, n_gaussians, n_gaussians, 20];
 %Training variables
 numClasses = 40;
-max_epoch = 4;
+max_epoch = 150;
 ValidationFrequency = 30;
-MiniBatchSize = 2;
+MiniBatchSize = 32;
 ExecutionEnvironment = 'cpu';
 optimizer = 'adam';
 InitialLearnRate = 0.001;
