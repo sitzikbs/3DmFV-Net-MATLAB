@@ -106,12 +106,12 @@ lgraph = connectLayers(lgraph, input_layer,['cnn_2', module_scope]);
 lgraph = connectLayers(lgraph, input_layer,['cnn_3', module_scope]);
 lgraph = connectLayers(lgraph, input_layer,['avg_pool', module_scope]);
 module_last_layer_name = ['concat_', module_scope];
-lgraph = addLayers(lgraph, depthConcatenationLayer(4,'Name',module_last_layer_name));
+lgraph = addLayers(lgraph, concatenationLayer(4, 4,'Name',module_last_layer_name));
 
 lgraph = connectLayers(lgraph,['relu_1', module_scope], ['concat_', module_scope, '/in1']);
-lgraph = connectLayers(lgraph,['relu_2', module_scope],['concat_', module_scope, '/in2']);
-lgraph = connectLayers(lgraph,['relu_3', module_scope],['concat_', module_scope, '/in3']);
-lgraph = connectLayers(lgraph,['relu_4', module_scope],['concat_', module_scope, '/in4']);
+lgraph = connectLayers(lgraph,['relu_2', module_scope], ['concat_', module_scope, '/in2']);
+lgraph = connectLayers(lgraph,['relu_3', module_scope], ['concat_', module_scope, '/in3']);
+lgraph = connectLayers(lgraph,['relu_4', module_scope], ['concat_', module_scope, '/in4']);
 
 end
 
