@@ -6,9 +6,9 @@ Created by [Yizhak Ben-Shabat (Itzik)](http://www.itzikbs.com), [Michael Lindenb
 
 
 ### Introduction
-This is the code for training a point cloud classification network using 3D modified Fisher Vectors.
+This is the MATLAB code for training a point cloud classification network using 3D modified Fisher Vectors.
 
-This work was be presented in IROS 2018  in Madrid, Spain and was also published in 
+This work was presented in IROS 2018  in Madrid, Spain and was also published in 
  Robotics and Automation Letters. 
  
  
@@ -53,6 +53,10 @@ Preprint:
 
 
 ### Usage instructions: 
+
+Requirements: 
+The code requires at least MATLAB 2019a (it is the first to support 3D CNNs). Additionally a supported GPU is required with a ComputeCapability of at least 3.0. and CUDA 10.0
+
 For training: 
 1. Download The data directory from the onedrive folder in the link below. 
 
@@ -61,19 +65,21 @@ This will also create a log directory and sub-directories based on the number of
 
 For testing: 
 
-1.a. Download the log directory form the onedrive link below 
+1.a. Download the log directory form the onedrive link below.
+
 1.b. Alternatively, test your own trained model by training first.
 
 2. Run `test.m` (make sure to set the path to the desired trained model).
 
 link tp data and log: 
+
 https://technionmail-my.sharepoint.com/:f:/g/personal/cadlab_technion_ac_il/EiylwxAQ4VxEpEo0Njqu59wBKohZwVRdG2LkaBoQCqvZ0w?e=4cwv1l
 
 
 
 It is trained on the ModelNet40 dataset by princeton, so please cite their work as well. 
 
-### data instructions: 
+### Data instructions: 
 To train on your own data the directory structure should be:
 1. Subdirectories named test and train. 
 2. Categories sub-sub-directories ( e.g. dataset_name/test/category_name/filename.txt)/
