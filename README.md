@@ -56,7 +56,7 @@ Preprint:
 For training: 
 1. Download The data directory from the onedrive folder in the link below. 
 
-2. Run train.m  ( with desired parameters - number of Gaussians, number of points, augmentations, etc).
+2. Run `train.m`  ( with desired parameters - number of Gaussians, number of points, augmentations, etc).
 This will also create a log directory and sub-directories based on the number of points and Gaussians. 
 
 For testing: 
@@ -64,7 +64,7 @@ For testing:
 1.a. Download the log directory form the onedrive link below 
 1.b. Alternatively, test your own trained model by training first.
 
-2. Run test.m (make sure to set the path to the desired trained model).
+2. Run `test.m` (make sure to set the path to the desired trained model).
 
 link tp data and log: 
 https://technionmail-my.sharepoint.com/:f:/g/personal/cadlab_technion_ac_il/EiylwxAQ4VxEpEo0Njqu59wBKohZwVRdG2LkaBoQCqvZ0w?e=4cwv1l
@@ -72,6 +72,12 @@ https://technionmail-my.sharepoint.com/:f:/g/personal/cadlab_technion_ac_il/Eiyl
 
 
 It is trained on the ModelNet40 dataset by princeton, so please cite their work as well. 
+
+### data instructions: 
+To train on your own data the directory structure should be:
+1. Subdirectories named test and train. 
+2. Categories sub-sub-directories ( e.g. dataset_name/test/category_name/filename.txt)/
+3. Each point cloud has to be saved as a separate `.txt` file. 
 
 ### License
 Our code is released under MIT License (see LICENSE file for details).
