@@ -1,4 +1,4 @@
-function [pcds] = pc_3dmfv_data_store(path, GMM, normalize, flatten, is_training, augmentations)
+function [pcds] = pc_3dmfv_data_store(path, n_points, GMM, normalize, flatten, is_training, augmentations)
 % pc_3dmfv_data_store reutrns a point cloud data store for labled point
 % clouds. It requires the directory names to be the labels.
 %INPUT: path - string containing the path to directory which contains the labled subdirectories of point
@@ -13,6 +13,7 @@ pcds = imageDatastore(path,...
 
     function pc_3dmfv = pc_reader(filename)
         points = table2array(readtable(filename));
+        points = points(randperm(n_points),:);
         points = Shrink2UnitSphere(gpuArray(points));
         % Maybe add augmentaitons in trainingset
         if is_training

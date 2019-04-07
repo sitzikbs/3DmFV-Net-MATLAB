@@ -1,4 +1,4 @@
-function [pcds] = pc_3dmfv_data_store(path, GMM, normalize, flatten, is_training, augmentations)
+function [pcds] = pc_3dmfv_data_store(path, n_points, GMM, normalize, flatten, is_training, augmentations)
 % pc_3dmfv_data_store reutrns a point cloud data store for labled point
 % clouds. It requires the directory names to be the labels.
 %INPUT: path - string containing the path to directory which contains the labled subdirectories of point
@@ -13,12 +13,13 @@ pcds = imageDatastore(path,...
 
     function pc_3dmfv = pc_reader(filename)
         points = table2array(readtable(filename));
+        points = points(randperm(n_points),:);
         points = Shrink2UnitSphere(gpuArray(points));
         % Maybe add augmentaitons in trainingset
         if is_training
             points = augment_data(gpuArray(points), augmentations);
         end
-        pc_3dmfv = compute_3dmfv(gpuArray(points), gpuArray(GMM.w), gpuArray(GMM.mu), gpuArray(GMM.sigma), gpuArray(normalize), gpuArray(flatten));
+        pc_3dmfv = compute_3dmfv(gpuArray(points), gpuArray(GMM.w), gpuArray(GMM.mu), gpuArray(GMM.sigma), gpuArray(normalize), gpuArray(flatten)));
     end
 end
 
@@ -41,16 +42,20 @@ end
 function augmented_points = augment_data(points, augmentations)
 % Insert data augmentations 
 augmented_points = points;
+
 if augmentations(1)
+    augmented_points = rotate_point_cloud(points);
+end
+if augmentations(2)
     augmented_points = scale_point_cloud(augmented_points, [0.66, 1.5]);
 end
-if augmentations(2) 
+if augmentations(3) 
     augmented_points = translate_point_cloud(points, 0.2);
 end
-if augmentations(3) 
+if augmentations(4) 
     augmented_points = jitter_point_cloud(augmented_points, 0.01, 0.05);
 end
-if augmentations(4) 
+if augmentations(5) 
     augmented_points = insert_outliers_to_point_cloud(points, 0.05);
 end
 end
@@ -93,6 +98,11 @@ outlier_data(idx,:) = 2 * randn([n_outliers, 3],'gpuArray') - 1;
 end
 
 function rotated_data = rotate_point_cloud(points)
-% Insert random rotations
-angle = 
+% Insert random rotations around y axis
+angle = 2*pi*randn(1);
+cos_a = cos(angle);
+sin_a = sin(angle); 
+Ry = [cos_a, 0, sin_a; 0, 1, 0; -sin_a, 0, cos_a];
+rotated_data = Ry * points';
+rotated_data = rotated_data';
 end
