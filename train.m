@@ -3,8 +3,8 @@ close all
 clc
 
 %% Initialize variables
-trainset_path = '/home/itzik/MatlabProjects/3DmFVNet/data/ModelNet40/train/'; 
-testset_path  = '/home/itzik/MatlabProjects/3DmFVNet/data/ModelNet40/test/';
+trainset_path = '../data/ModelNet40/train/'; 
+testset_path  = '../data/ModelNet40/test/';
 log_dir = './log/';
 if ~exist(log_dir,'dir')
     mkdir(log_dir);
